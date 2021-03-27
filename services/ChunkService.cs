@@ -12,6 +12,12 @@ namespace Img2Asc.services
             _colorConvertor = colorConvertor;
         }
 
+        public int CalculateHeightInChunks(int chunkHeight, int imageHeight) =>
+            (int)imageHeight / chunkHeight;
+
+        public int CalculateWidthInChunks(int chunkWidth, int imageWidth) =>
+            (int)imageWidth / chunkWidth;
+
         public Chunk GetChunk(Bitmap source, int startX, int startY, int width, int height)
         {
             var chunk = new Color[height, width];

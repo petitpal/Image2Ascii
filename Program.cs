@@ -9,19 +9,18 @@ namespace Img2Asc
     {
         static void Main(string[] args)
         {
-            var file = @"C:\Users\Paul\Source\Repos\petitpal\Image2Ascii\samples\coleman.jpg";
-            using var source = new Bitmap(file);
+            var file = args[0];
+            var chunkWidth = Convert.ToInt32(args[1]);
+            var chunkHeight = Convert.ToInt32(args[2]);
 
 
             IGreyscaleConvertor colorConvertor = new GreyscaleConvertor();
             IChunkService chunkService = new ChunkService(colorConvertor);
 
+            using var source = new Bitmap(file);
 
-            var chunkWidth = 4;
-            var chunkHeight = 3;
-
-            var totalChunksWidth = (int)source.Width / chunkWidth;
-            var totalChunksHeight = (int)source.Height / chunkHeight;
+            var totalChunksWidth = chunkService.CalculateWidthInChunks(chunkWidth, source.Width);
+            var totalChunksHeight = chunkService.CalculateWidthInChunks(chunkHeight, source.Height);
 
             var chunks = new Chunk[totalChunksHeight, totalChunksWidth];
 
@@ -37,7 +36,6 @@ namespace Img2Asc
             // convert each chunk - compare to ascii image 'chunk' (cache these)
 
 
-            Console.WriteLine("Hello World!");
         }
 
     }

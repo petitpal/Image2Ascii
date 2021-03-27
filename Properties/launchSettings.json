@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Img2Asc": {
+      "commandName": "Project",
+      "commandLineArgs": "\"C:\\Users\\Paul\\Source\\Repos\\petitpal\\Image2Ascii\\samples\\coleman.jpg\" 3 4"
+    }
+  }
+}
