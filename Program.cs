@@ -1,5 +1,4 @@
-﻿using Img2Asc.entities;
-using Img2Asc.services;
+﻿using Img2Asc.services;
 using System;
 using System.Drawing;
 
@@ -19,20 +18,11 @@ namespace Img2Asc
 
             using var source = new Bitmap(file);
 
-            var totalChunksWidth = chunkService.CalculateWidthInChunks(chunkWidth, source.Width);
-            var totalChunksHeight = chunkService.CalculateWidthInChunks(chunkHeight, source.Height);
-
-            var chunks = new Chunk[totalChunksHeight, totalChunksWidth];
 
             // get chunks from image
-            for (var rowIndex = 0; rowIndex < totalChunksHeight; rowIndex++)
-            {
-                for (var colIndex = 0; colIndex < totalChunksWidth; colIndex++)
-                {
-                    chunks[rowIndex, colIndex] = chunkService.GetChunk(source, rowIndex, colIndex, chunkWidth, chunkHeight);
-                }
-            }
+            var chunks = chunkService.GetChunks(source, chunkWidth, chunkHeight);
 
+            
             // convert each chunk - compare to ascii image 'chunk' (cache these)
 
 
