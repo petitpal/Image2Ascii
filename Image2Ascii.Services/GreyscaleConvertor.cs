@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 
-namespace Img2Asc.services
+namespace Img2Asc.Services
 {
     public class GreyscaleConvertor : IGreyscaleConvertor
     {

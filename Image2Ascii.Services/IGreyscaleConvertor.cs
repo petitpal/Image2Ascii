@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace Img2Asc.services
+namespace Img2Asc.Services
 {
     public interface IGreyscaleConvertor
     {

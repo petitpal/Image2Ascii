@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace Img2Asc.entities
+namespace Img2Asc.Entities
 {
     public class Chunk
     {

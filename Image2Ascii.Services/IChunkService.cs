@@ -1,7 +1,7 @@
-﻿using Img2Asc.entities;
+﻿using Img2Asc.Entities;
 using System.Drawing;
 
-namespace Img2Asc.services
+namespace Img2Asc.Services
 {
     public interface IChunkService
     {
