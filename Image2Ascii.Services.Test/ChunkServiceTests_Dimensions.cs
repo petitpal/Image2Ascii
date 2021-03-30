@@ -2,11 +2,10 @@ using Img2Asc.Services;
 using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
-using System.Drawing;
 
 namespace Image2Ascii.Test
 {
-    public class ChunkServiceTests
+    public class ChunkServiceTests_Dimensions
     {
         private Mock<IGreyscaleConvertor> _greyScaleConvertor;
         private IChunkService _chunkService;
@@ -55,36 +54,5 @@ namespace Image2Ascii.Test
             // assert
             Assert.AreEqual(expectedChunks, chunkCount);
         }
-
-
-
-        private static IEnumerable<TestCaseData> GetChunks_Basic_TestDate()
-        {
-            // bitmap width / bitmap height / chunk width / chunk height / expected chunks wide / expected chunks high
-            yield return new TestCaseData(100, 100, 10, 10, 10, 10).SetName("{m} (100/100/10/10/10/10)");
-            yield return new TestCaseData(100, 200, 10, 10, 10, 20).SetName("{m} (100/200/10/10/10/20)");
-        }
-
-
-        [TestCaseSource(nameof(GetChunks_Basic_TestDate))]
-        public void GetChunks_Basic(
-            int bitmapWidth,
-            int bitmapHeight,
-            int chunkWidth,
-            int chunkHeight,
-            int expectedChunkWidth,
-            int expectedChunkHeight)
-        {
-            // arrange
-            var source = new Bitmap(bitmapWidth, bitmapHeight);
-
-            // act
-            var chunks = _chunkService.GetChunks(source, chunkWidth, chunkHeight);
-
-            // assert
-            Assert.AreEqual(expectedChunkWidth, chunks.GetLength(1));
-            Assert.AreEqual(expectedChunkHeight, chunks.GetLength(0));
-        }
-
     }
 }

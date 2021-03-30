@@ -20,41 +20,65 @@ namespace Img2Asc.Services
             (int)Math.Ceiling((decimal)imageWidth / chunkWidth);
 
 
-        public Chunk[,] GetChunks(Bitmap source, int chunkWidth, int chunkHeight)
+        public Chunk[,] GetChunks(
+            Bitmap source,
+            int chunkWidth,
+            int chunkHeight,
+            Color defaultBackgroundColour)
         {
             var totalChunksWidth = CalculateWidthInChunks(chunkWidth, source.Width);
             var totalChunksHeight = CalculateHeightInChunks(chunkHeight, source.Height);
             var chunks = new Chunk[totalChunksHeight, totalChunksWidth];
 
-            for (var rowIndex = 0; rowIndex < totalChunksHeight; rowIndex++)
+            // vertical
+            for (var chunkRowIndex = 0; chunkRowIndex < totalChunksHeight; chunkRowIndex++)
             {
-                for (var colIndex = 0; colIndex < totalChunksWidth; colIndex++)
+                // hoiztonal
+                for (var chunkColIndex = 0; chunkColIndex < totalChunksWidth; chunkColIndex++)
                 {
-                    chunks[rowIndex, colIndex] = GetChunk(source, rowIndex, colIndex, chunkWidth, chunkHeight);
+                    chunks[chunkRowIndex, chunkColIndex] = GetChunk(source,
+                                                                    chunkRowIndex,
+                                                                    chunkColIndex,
+                                                                    chunkWidth,
+                                                                    chunkHeight,
+                                                                    defaultBackgroundColour);
                 }
             }
 
             return chunks;
         }
 
-        public Chunk GetChunk(Bitmap source, int startX, int startY, int width, int height)
+        public Chunk GetChunk(
+            Bitmap source,
+            int chunkRowIndex,
+            int chunkColIndex,
+            int chunkWidth,
+            int chunkHeight,
+            Color defaultBackgroundColour)
         {
-            var chunk = new Color[height, width];
+            var chunk = new Color[chunkHeight, chunkWidth];
 
-            /*
-             *  p p p
-             *  p p p
-             *  p p p
-             *  p p p
-             */
+            var offsetStartX = chunkRowIndex * chunkWidth;
+            var offsetStartY = chunkColIndex * chunkHeight;
 
-            for (var rowIndex = 0; rowIndex < height; rowIndex++)
+            // vertical
+            for (var rowIndex = 0; rowIndex < chunkHeight; rowIndex++)
             {
-                for (var colIndex = 0; colIndex < width; colIndex++)
+                // horizontal
+                for (var colIndex = 0; colIndex < chunkWidth; colIndex++)
                 {
-                    var sourceColor = source.GetPixel(rowIndex, colIndex);
-                    var greyscale = _colorConvertor.ToGreyscale(sourceColor);
-                    chunk[rowIndex, colIndex] = greyscale;
+                    var pixelX = offsetStartX + colIndex;
+                    var pixelY = offsetStartY + rowIndex;
+                    if (pixelX < source.Width && pixelY < source.Height)
+                    {
+                        var sourceColor = source.GetPixel(pixelX, pixelY);
+                        var greyscale = _colorConvertor.ToGreyscale(sourceColor);
+                        chunk[rowIndex, colIndex] = greyscale;
+                    }
+                    else
+                    {
+                        chunk[rowIndex, colIndex] = defaultBackgroundColour;
+                    }
                 }
             }
 
