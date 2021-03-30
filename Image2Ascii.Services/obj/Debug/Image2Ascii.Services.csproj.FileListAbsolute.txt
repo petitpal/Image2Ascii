@@ -1,0 +1,9 @@
+C:\git\petitpal\Image2Ascii\Image2Ascii.Services\bin\Debug\Image2Ascii.Services.dll
+C:\git\petitpal\Image2Ascii\Image2Ascii.Services\bin\Debug\Image2Ascii.Services.pdb
+C:\git\petitpal\Image2Ascii\Image2Ascii.Services\bin\Debug\Image2Ascii.Entities.dll
+C:\git\petitpal\Image2Ascii\Image2Ascii.Services\bin\Debug\Image2Ascii.Entities.pdb
+C:\git\petitpal\Image2Ascii\Image2Ascii.Services\obj\Debug\Image2Ascii.Services.csprojAssemblyReference.cache
+C:\git\petitpal\Image2Ascii\Image2Ascii.Services\obj\Debug\Image2Ascii.Services.csproj.CoreCompileInputs.cache
+C:\git\petitpal\Image2Ascii\Image2Ascii.Services\obj\Debug\Image2Ascii.Services.csproj.CopyComplete
+C:\git\petitpal\Image2Ascii\Image2Ascii.Services\obj\Debug\Image2Ascii.Services.dll
+C:\git\petitpal\Image2Ascii\Image2Ascii.Services\obj\Debug\Image2Ascii.Services.pdb

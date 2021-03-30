@@ -13,4 +13,8 @@
     <Folder Include="samples\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Image2Ascii.Services\Image2Ascii.Services.csproj" />
+  </ItemGroup>
+
 </Project>
