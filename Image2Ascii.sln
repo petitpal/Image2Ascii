@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Image2Ascii.Services", "Ima
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Image2Ascii.Entities", "Image2Ascii.Entities\Image2Ascii.Entities.csproj", "{629EF156-2E9A-446F-8B04-19B65D8F14F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Image2Ascii.Services.Test", "Image2Ascii.Services.Test\Image2Ascii.Services.Test.csproj", "{72147615-8A4E-4685-A4EF-1A3E88D22469}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Image2Ascii.Services.Test", "Image2Ascii.Services.Test\Image2Ascii.Services.Test.csproj", "{72147615-8A4E-4685-A4EF-1A3E88D22469}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
