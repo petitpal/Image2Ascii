@@ -3,46 +3,39 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Drawing;
+using System.IO;
 
 namespace Img2Asc
 {
     class Program
     {
-        static void Main(string[] args)
+        /// <param name="sourceFile">Source file to be converted</param>
+        /// <param name="chunkWidth">Width of chunks</param>
+        /// <param name="chunkHeight">Height of chunks</param>
+        static void Main(FileInfo sourceFile, int chunkWidth, int chunkHeight)
         {
-            var file = args[0];
-            var chunkWidth = Convert.ToInt32(args[1]);
-            var chunkHeight = Convert.ToInt32(args[2]);
+            if (sourceFile == null || chunkWidth < 0 | chunkHeight < 0) return;
 
-
-            using var host = CreateHostBuilder(args).Build();
+            using var host = CreateHostBuilder().Build();
             using var serviceScope = host.Services.CreateScope();
 
-            var chunkService = serviceScope.ServiceProvider.GetService<IChunkService>();
-
-            var defaultBackground = Color.Transparent;
-            using var source = new Bitmap(file);
-
-            // get chunks from image
-            var chunks = chunkService.GetChunks(source, chunkWidth, chunkHeight, defaultBackground);
-
-            
-            // convert each chunk - compare to ascii image 'chunk' (cache these)
-
+            var app = serviceScope.ServiceProvider.GetService<IApp>();
+            app.Run(sourceFile.FullName, chunkWidth, chunkHeight);
 
         }
 
 
-        static IHostBuilder CreateHostBuilder(string[] args)
+        static IHostBuilder CreateHostBuilder()
         {
-            var host = Host.CreateDefaultBuilder(args);
+            var host = Host.CreateDefaultBuilder();
 
             // default
             host.ConfigureServices((_, services) =>
-                    services.AddTransient<IChunkService, ChunkService>()
+                    services.AddSingleton<IApp, App>()
+                            .AddTransient<IChunkService, ChunkService>()
                             .AddTransient<IGreyscaleConvertor, GreyscaleConvertor>()
             );
-            
+
             return host;
         }
 

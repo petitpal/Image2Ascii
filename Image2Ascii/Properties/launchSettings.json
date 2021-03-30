@@ -2,7 +2,7 @@
   "profiles": {
     "Img2Asc": {
       "commandName": "Project",
-      "commandLineArgs": "\"C:\\Users\\Paul\\Source\\Repos\\petitpal\\Image2Ascii\\samples\\coleman.jpg\" 3 4"
+      "commandLineArgs": "--source-file C:\\git\\petitpal\\Image2Ascii\\Image2Ascii\\samples\\coleman.jpg --chunk-width 3 --chunk-height 4"
     }
   }
 }
