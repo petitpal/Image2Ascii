@@ -1,12 +1,7 @@
 ﻿using Img2Asc.Services;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Img2Asc
+namespace Img2Asc.Applicaton
 {
     public class App : IApp
     {
@@ -29,10 +24,5 @@ namespace Img2Asc
             // convert each chunk - compare to ascii image 'chunk' (cache these)
 
         }
-    }
-
-    public interface IApp
-    {
-        void Run(string sourceFile, int chunkWidth, int chunkHeight);
     }
 }
