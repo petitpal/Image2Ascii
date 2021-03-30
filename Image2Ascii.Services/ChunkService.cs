@@ -1,4 +1,5 @@
 ﻿using Img2Asc.entities;
+using System;
 using System.Drawing;
 
 namespace Img2Asc.services
@@ -13,16 +14,16 @@ namespace Img2Asc.services
         }
 
         public int CalculateHeightInChunks(int chunkHeight, int imageHeight) =>
-            (int)imageHeight / chunkHeight;
+            (int)Math.Ceiling((decimal)imageHeight / chunkHeight);
 
         public int CalculateWidthInChunks(int chunkWidth, int imageWidth) =>
-            (int)imageWidth / chunkWidth;
+            (int)Math.Ceiling((decimal)imageWidth / chunkWidth);
 
 
         public Chunk[,] GetChunks(Bitmap source, int chunkWidth, int chunkHeight)
         {
             var totalChunksWidth = CalculateWidthInChunks(chunkWidth, source.Width);
-            var totalChunksHeight = CalculateWidthInChunks(chunkHeight, source.Height);
+            var totalChunksHeight = CalculateHeightInChunks(chunkHeight, source.Height);
             var chunks = new Chunk[totalChunksHeight, totalChunksWidth];
 
             for (var rowIndex = 0; rowIndex < totalChunksHeight; rowIndex++)

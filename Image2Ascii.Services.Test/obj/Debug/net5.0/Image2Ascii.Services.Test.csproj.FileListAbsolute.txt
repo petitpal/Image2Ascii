@@ -101,3 +101,5 @@ C:\git\petitpal\Image2Ascii\Image2Ascii.Services.Test\obj\Debug\net5.0\Image2Asc
 C:\git\petitpal\Image2Ascii\Image2Ascii.Services.Test\obj\Debug\net5.0\ref\Image2Ascii.Services.Test.dll
 C:\git\petitpal\Image2Ascii\Image2Ascii.Services.Test\obj\Debug\net5.0\Image2Ascii.Services.Test.pdb
 C:\git\petitpal\Image2Ascii\Image2Ascii.Services.Test\obj\Debug\net5.0\Image2Ascii.Services.Test.genruntimeconfig.cache
+C:\git\petitpal\Image2Ascii\Image2Ascii.Services.Test\bin\Debug\net5.0\Castle.Core.dll
+C:\git\petitpal\Image2Ascii\Image2Ascii.Services.Test\bin\Debug\net5.0\Moq.dll
