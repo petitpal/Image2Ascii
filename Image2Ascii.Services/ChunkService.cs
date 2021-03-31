@@ -58,8 +58,8 @@ namespace Img2Asc.Services
         {
             var chunk = new Color[chunkHeight, chunkWidth];
 
-            var offsetStartX = chunkRowIndex * chunkWidth;
-            var offsetStartY = chunkColIndex * chunkHeight;
+            var offsetStartY = chunkRowIndex * chunkWidth;
+            var offsetStartX = chunkColIndex * chunkHeight;
 
             // vertical
             for (var rowIndex = 0; rowIndex < chunkHeight; rowIndex++)

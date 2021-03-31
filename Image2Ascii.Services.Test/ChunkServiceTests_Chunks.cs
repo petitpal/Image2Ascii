@@ -53,7 +53,7 @@ namespace Image2Ascii.Test
         }
 
         [Test]
-        public void GetChunks_CorrectPortions()
+        public void GetChunks_CorrectPortions_4x4()
         {
             // arrange
             var chunkSize = 2;
@@ -66,45 +66,102 @@ namespace Image2Ascii.Test
             graph.FillRectangle(new SolidBrush(Color.Red), 2, 0, chunkSize, chunkSize);
             graph.FillRectangle(new SolidBrush(Color.Yellow), 2, 2, chunkSize, chunkSize);
             graph.Save();
+            // act
+            var chunks = _chunkService.GetChunks(source, chunkSize, chunkSize, defaultBackground);
+
+            // assert
+            var greyScaleWhite = Color.FromArgb(255, 55, 183, 19);
+            var greyScaleBlack = Color.FromArgb(255, 0, 0, 0);
+            var greyScaleRed = Color.FromArgb(255, 55, 0, 0);
+            var greyScaleYellow = Color.FromArgb(255, 55, 183, 0);
+
+            Assert.AreEqual(2, chunks.GetLength(0));
+            Assert.AreEqual(2, chunks.GetLength(1));
+            Assert.IsTrue(CheckChunkColour(chunks[0, 0], greyScaleWhite), "white");
+            Assert.IsTrue(CheckChunkColour(chunks[0, 1], greyScaleRed), "red");
+            Assert.IsTrue(CheckChunkColour(chunks[1, 0], greyScaleBlack), "black");
+            Assert.IsTrue(CheckChunkColour(chunks[1, 1], greyScaleYellow), "yellow");
+        }
+
+        private bool CheckChunkColour(Chunk chunk, Color expectedColor)
+        {
+            return (bool)(chunk.Data[0, 0] == expectedColor
+                          && chunk.Data[0, 1] == expectedColor
+                          && chunk.Data[1, 0] == expectedColor
+                          && chunk.Data[1, 1] == expectedColor);
+        }
+
+        [Test]
+        public void GetChunks_CorrectPortions_6x4()
+        {
+            // arrange
+            var chunkSize = 2;
+            var defaultBackground = Color.Transparent;
+
+            using var source = new Bitmap(6, 4);
+            using var graph = Graphics.FromImage(source);
+            graph.FillRectangle(new SolidBrush(Color.White), 0, 0, chunkSize, chunkSize);
+            graph.FillRectangle(new SolidBrush(Color.Black), 0, 2, chunkSize, chunkSize);
+            graph.FillRectangle(new SolidBrush(Color.Red), 2, 0, chunkSize, chunkSize);
+            graph.FillRectangle(new SolidBrush(Color.Yellow), 2, 2, chunkSize, chunkSize);
+            graph.FillRectangle(new SolidBrush(Color.White), 4, 0, chunkSize, chunkSize);
+            graph.FillRectangle(new SolidBrush(Color.Red), 4, 2, chunkSize, chunkSize);
+            graph.Save();
 
             // act
             var chunks = _chunkService.GetChunks(source, chunkSize, chunkSize, defaultBackground);
 
             // assert
-            Assert.AreEqual(2, chunks.GetLength(0));
-            Assert.AreEqual(2, chunks.GetLength(1));
-
-
-            var chunk1 = chunks[0, 0];
             var greyScaleWhite = Color.FromArgb(255, 55, 183, 19);
-            Assert.AreEqual(greyScaleWhite, chunk1.Data[0, 0]);
-            Assert.AreEqual(greyScaleWhite, chunk1.Data[0, 1]);
-            Assert.AreEqual(greyScaleWhite, chunk1.Data[1, 0]);
-            Assert.AreEqual(greyScaleWhite, chunk1.Data[1, 1]);
-
-
-            Chunk chunk2 = chunks[0, 1];
             var greyScaleBlack = Color.FromArgb(255, 0, 0, 0);
-            Assert.AreEqual(greyScaleBlack, chunk2.Data[0, 0]);
-            Assert.AreEqual(greyScaleBlack, chunk2.Data[0, 1]);
-            Assert.AreEqual(greyScaleBlack, chunk2.Data[1, 0]);
-            Assert.AreEqual(greyScaleBlack, chunk2.Data[1, 1]);
-
-
-            Chunk chunk3 = chunks[1, 0];
             var greyScaleRed = Color.FromArgb(255, 55, 0, 0);
-            Assert.AreEqual(greyScaleRed, chunk3.Data[0, 0]);
-            Assert.AreEqual(greyScaleRed, chunk3.Data[0, 1]);
-            Assert.AreEqual(greyScaleRed, chunk3.Data[1, 0]);
-            Assert.AreEqual(greyScaleRed, chunk3.Data[1, 1]);
-
-
-            Chunk chunk4 = chunks[1, 1];
             var greyScaleYellow = Color.FromArgb(255, 55, 183, 0);
-            Assert.AreEqual(greyScaleYellow, chunk4.Data[0, 0]);
-            Assert.AreEqual(greyScaleYellow, chunk4.Data[0, 1]);
-            Assert.AreEqual(greyScaleYellow, chunk4.Data[1, 0]);
-            Assert.AreEqual(greyScaleYellow, chunk4.Data[1, 1]);
+
+            Assert.AreEqual(2, chunks.GetLength(0));
+            Assert.AreEqual(3, chunks.GetLength(1));
+            Assert.IsTrue(CheckChunkColour(chunks[0, 0], greyScaleWhite), "white");
+            Assert.IsTrue(CheckChunkColour(chunks[0, 1], greyScaleRed), "red");
+            Assert.IsTrue(CheckChunkColour(chunks[0, 2], greyScaleWhite), "white");
+            Assert.IsTrue(CheckChunkColour(chunks[1, 0], greyScaleBlack), "black");
+            Assert.IsTrue(CheckChunkColour(chunks[1, 1], greyScaleYellow), "yellow");
+            Assert.IsTrue(CheckChunkColour(chunks[1, 2], greyScaleRed), "red");
+        }
+
+
+        [Test]
+        public void GetChunks_CorrectPortions_4x6()
+        {
+            // arrange
+            var chunkSize = 2;
+            var defaultBackground = Color.Transparent;
+
+            using var source = new Bitmap(4, 6);
+            using var graph = Graphics.FromImage(source);
+            graph.FillRectangle(new SolidBrush(Color.White), 0, 0, chunkSize, chunkSize);
+            graph.FillRectangle(new SolidBrush(Color.Red), 2, 0, chunkSize, chunkSize);
+            graph.FillRectangle(new SolidBrush(Color.Black), 0, 2, chunkSize, chunkSize);
+            graph.FillRectangle(new SolidBrush(Color.Yellow), 2, 2, chunkSize, chunkSize);
+            graph.FillRectangle(new SolidBrush(Color.White), 0, 4, chunkSize, chunkSize);
+            graph.FillRectangle(new SolidBrush(Color.Red), 2, 4, chunkSize, chunkSize);
+            graph.Save();
+
+            // act
+            var chunks = _chunkService.GetChunks(source, chunkSize, chunkSize, defaultBackground);
+
+            // assert
+            var greyScaleWhite = Color.FromArgb(255, 55, 183, 19);
+            var greyScaleBlack = Color.FromArgb(255, 0, 0, 0);
+            var greyScaleRed = Color.FromArgb(255, 55, 0, 0);
+            var greyScaleYellow = Color.FromArgb(255, 55, 183, 0);
+
+            Assert.AreEqual(3, chunks.GetLength(0));
+            Assert.AreEqual(2, chunks.GetLength(1));
+            Assert.IsTrue(CheckChunkColour(chunks[0, 0], greyScaleWhite), "white");
+            Assert.IsTrue(CheckChunkColour(chunks[0, 1], greyScaleRed), "red");
+            Assert.IsTrue(CheckChunkColour(chunks[1, 0], greyScaleBlack), "black");
+            Assert.IsTrue(CheckChunkColour(chunks[1, 1], greyScaleYellow), "yellow");
+            Assert.IsTrue(CheckChunkColour(chunks[2, 0], greyScaleWhite), "white");
+            Assert.IsTrue(CheckChunkColour(chunks[2, 1], greyScaleRed), "red");
         }
 
     }
