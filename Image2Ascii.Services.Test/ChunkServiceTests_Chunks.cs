@@ -53,7 +53,7 @@ namespace Image2Ascii.Test
         }
 
         [Test]
-        public void GetChunks_CorrectPortions_4x4()
+        public void GetChunks_CorrectPortions_2x4x4()
         {
             // arrange
             var chunkSize = 2;
@@ -92,7 +92,7 @@ namespace Image2Ascii.Test
         }
 
         [Test]
-        public void GetChunks_CorrectPortions_6x4()
+        public void GetChunks_CorrectPortions_2x6x4()
         {
             // arrange
             var chunkSize = 2;
@@ -129,7 +129,7 @@ namespace Image2Ascii.Test
 
 
         [Test]
-        public void GetChunks_CorrectPortions_4x6()
+        public void GetChunks_CorrectPortions_2x4x6()
         {
             // arrange
             var chunkSize = 2;
@@ -162,6 +162,56 @@ namespace Image2Ascii.Test
             Assert.IsTrue(CheckChunkColour(chunks[1, 1], greyScaleYellow), "yellow");
             Assert.IsTrue(CheckChunkColour(chunks[2, 0], greyScaleWhite), "white");
             Assert.IsTrue(CheckChunkColour(chunks[2, 1], greyScaleRed), "red");
+        }
+
+
+        [Test]
+        public void GetChunks_CorrectPortions_3x9x9()
+        {
+            // arrange
+            var chunkSize = 3;
+            var defaultBackground = Color.Transparent;
+
+            using var source = new Bitmap(9, 9);
+            using var graph = Graphics.FromImage(source);
+
+            graph.FillRectangle(new SolidBrush(Color.White), 0, 0, chunkSize, chunkSize);
+            graph.FillRectangle(new SolidBrush(Color.Red), 3, 0, chunkSize, chunkSize);
+            graph.FillRectangle(new SolidBrush(Color.Black), 6, 0, chunkSize, chunkSize);
+
+            graph.FillRectangle(new SolidBrush(Color.Black), 0, 3, chunkSize, chunkSize);
+            graph.FillRectangle(new SolidBrush(Color.White), 3, 3, chunkSize, chunkSize);
+            graph.FillRectangle(new SolidBrush(Color.Red), 6, 3, chunkSize, chunkSize);
+
+            graph.FillRectangle(new SolidBrush(Color.Red), 0, 6, chunkSize, chunkSize);
+            graph.FillRectangle(new SolidBrush(Color.Black), 3, 6, chunkSize, chunkSize);
+            graph.FillRectangle(new SolidBrush(Color.White), 6, 6, chunkSize, chunkSize);
+
+            graph.Save();
+
+            // act
+            var chunks = _chunkService.GetChunks(source, chunkSize, chunkSize, defaultBackground);
+
+            // assert
+            var greyScaleWhite = Color.FromArgb(255, 55, 183, 19);
+            var greyScaleBlack = Color.FromArgb(255, 0, 0, 0);
+            var greyScaleRed = Color.FromArgb(255, 55, 0, 0);
+
+            Assert.AreEqual(3, chunks.GetLength(0));
+            Assert.AreEqual(3, chunks.GetLength(1));
+
+            Assert.IsTrue(CheckChunkColour(chunks[0, 0], greyScaleWhite), "white 1");
+            Assert.IsTrue(CheckChunkColour(chunks[0, 1], greyScaleRed), "red 1");
+            Assert.IsTrue(CheckChunkColour(chunks[0, 2], greyScaleBlack), "black 1");
+
+            Assert.IsTrue(CheckChunkColour(chunks[1, 0], greyScaleBlack), "black 2");
+            Assert.IsTrue(CheckChunkColour(chunks[1, 1], greyScaleWhite), "white 2");
+            Assert.IsTrue(CheckChunkColour(chunks[1, 2], greyScaleRed), "red 2");
+
+            Assert.IsTrue(CheckChunkColour(chunks[2, 0], greyScaleRed), "red 3");
+            Assert.IsTrue(CheckChunkColour(chunks[2, 1], greyScaleBlack), "black 3");
+            Assert.IsTrue(CheckChunkColour(chunks[2, 2], greyScaleWhite), "white 3");
+
         }
 
     }
