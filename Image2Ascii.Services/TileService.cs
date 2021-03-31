@@ -64,7 +64,7 @@ namespace Image2Ascii.Services
                         graph.DrawString(character.ToString(), tileFont, foregroundBrush, x: 0, y: 0);
                         graph.Save();
                     }
-                    tileBitmap.Save($"c:\\temp\\tile{tileIndex}.bmp");
+                    //tileBitmap.Save($"c:\\temp\\tile{tileIndex}.bmp");
 
                     tiles[tileIndex] = GetTile(tileBitmap, 0, 0, tileWidth, tileHeight, backgroundColour);
                 }
