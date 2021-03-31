@@ -1,8 +1,8 @@
 ﻿using System.Drawing;
 
-namespace Img2Asc.Entities
+namespace Image2Ascii.Entities
 {
-    public class Chunk
+    public class Tile
     {
         public Color[,] Data { get; set; }
     }

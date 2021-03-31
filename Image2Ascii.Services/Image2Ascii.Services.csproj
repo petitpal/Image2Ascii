@@ -42,9 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChunkService.cs" />
+    <Compile Include="CharacterService.cs" />
+    <Compile Include="TileService.cs" />
     <Compile Include="GreyscaleConvertor.cs" />
-    <Compile Include="IChunkService.cs" />
+    <Compile Include="ICharacterService.cs" />
+    <Compile Include="ITileService.cs" />
     <Compile Include="IGreyscaleConvertor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

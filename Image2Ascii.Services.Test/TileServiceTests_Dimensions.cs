@@ -1,20 +1,20 @@
-using Img2Asc.Services;
+using Image2Ascii.Services;
 using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
 
 namespace Image2Ascii.Test
 {
-    public class ChunkServiceTests_Dimensions
+    public class TileServiceTests_Dimensions
     {
         private Mock<IGreyscaleConvertor> _greyScaleConvertor;
-        private IChunkService _chunkService;
+        private ITileService _chunkService;
 
         [SetUp]
         public void Setup()
         {
             _greyScaleConvertor = new Mock<IGreyscaleConvertor>();
-            _chunkService = new ChunkService(_greyScaleConvertor.Object);
+            _chunkService = new TileService(_greyScaleConvertor.Object);
         }
 
 
@@ -36,7 +36,7 @@ namespace Image2Ascii.Test
             // arrange
 
             // act
-            var chunkCount = _chunkService.CalculateWidthInChunks(chunkWidth, sourceWidth);
+            var chunkCount = _chunkService.CalculateWidthInTiles(chunkWidth, sourceWidth);
 
             // assert
             Assert.AreEqual(expectedChunks, chunkCount);
@@ -49,7 +49,7 @@ namespace Image2Ascii.Test
             // arrange
 
             // act
-            var chunkCount = _chunkService.CalculateWidthInChunks(chunkHeight, sourceHeight);
+            var chunkCount = _chunkService.CalculateWidthInTiles(chunkHeight, sourceHeight);
 
             // assert
             Assert.AreEqual(expectedChunks, chunkCount);

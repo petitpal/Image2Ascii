@@ -1,7 +1,7 @@
-﻿namespace Img2Asc.Applicaton
+﻿namespace Image2Ascii.Applicaton
 {
     public interface IApp
     {
-        void Run(string sourceFile, int chunkWidth, int chunkHeight);
+        void Run(string sourceFile, int tileWidth, int tileHeight);
     }
 }

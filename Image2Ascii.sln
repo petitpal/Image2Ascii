@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31025.194
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Img2Asc", "Image2Ascii\Img2Asc.csproj", "{2B2F2100-4CD8-4864-A095-B49047CEA866}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Image2Ascii", "Image2Ascii\Image2Ascii.csproj", "{2B2F2100-4CD8-4864-A095-B49047CEA866}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Image2Ascii.Services", "Image2Ascii.Services\Image2Ascii.Services.csproj", "{61BF4A31-187F-4A30-BC81-F30511035FC4}"
 EndProject

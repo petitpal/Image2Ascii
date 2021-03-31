@@ -1,11 +1,11 @@
-using Img2Asc.Services;
+using Image2Ascii.Services;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Drawing;
 
 namespace Image2Ascii.Test
 {
-    public class ChunkServiceTests_GreyScale
+    public class TileServiceTests_GreyScale
     {
         private IGreyscaleConvertor _greyScaleConvertor;
 
