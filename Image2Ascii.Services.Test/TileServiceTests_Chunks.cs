@@ -217,11 +217,11 @@ namespace Image2Ascii.Test
         public void GetTiles_Characters()
         {
             // arrange
-            var source = new char[] { 'a', 'A', 'b', 'B' };
-            var tileHeight = 20;
-            var tileWidth = 18;
-            var background = Color.White;
-            var foreground = Color.Black;
+            var source = new char[] { 'a', 'A', 'b', 'B', 'W', '!' };
+            var tileHeight = 50;
+            var tileWidth = 50;
+            var background = Color.Black;
+            var foreground = Color.White;
 
             // act
             var tiles = _tileService.GetTiles(source, tileWidth, tileHeight, foreground, background);

@@ -48,10 +48,15 @@ namespace Image2Ascii.Services
         {
             var tiles = new Tile[source.Length];
             var backgroundBrush = new SolidBrush(backgroundColour);
-            var foregroundBrush = new SolidBrush(foregroundColour);
-            var tileFont = new Font(FontFamily.GenericMonospace, tileHeight, FontStyle.Regular, GraphicsUnit.Pixel);
-            var tileIndex = 0;
 
+            var fontAdjustment = 0.4;
+            var fontOffset = -0.2;
+            var fontSize = (float)(tileHeight + tileHeight * fontAdjustment);
+            var fontPaintOffset = (float)(tileHeight * fontOffset);
+
+            var foregroundBrush = new SolidBrush(foregroundColour);
+            var tileFont = new Font(FontFamily.GenericMonospace, fontSize, FontStyle.Regular, GraphicsUnit.Pixel);
+            var tileIndex = 0;
 
             foreach (var character in source)
             {
@@ -59,12 +64,17 @@ namespace Image2Ascii.Services
                 {
                     using (var graph = Graphics.FromImage(tileBitmap))
                     {
-                        var imageRect = new Rectangle(0, 0, tileWidth, tileHeight);
-                        graph.FillRectangle(backgroundBrush, imageRect);
-                        graph.DrawString(character.ToString(), tileFont, foregroundBrush, x: 0, y: 0);
+                        graph.FillRectangle(backgroundBrush, 0, 0, tileWidth, tileHeight);
+                        graph.DrawString(
+                            character.ToString(),
+                            tileFont,
+                            foregroundBrush,
+                            fontPaintOffset,
+                            fontPaintOffset,
+                            StringFormat.GenericDefault);
                         graph.Save();
                     }
-                    //tileBitmap.Save($"c:\\temp\\tile{tileIndex}.bmp");
+                    tileBitmap.Save($"c:\\temp\\tile{tileIndex}.bmp");
 
                     tiles[tileIndex] = GetTile(tileBitmap, 0, 0, tileWidth, tileHeight, backgroundColour);
                 }
