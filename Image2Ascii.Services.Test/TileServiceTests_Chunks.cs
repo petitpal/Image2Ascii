@@ -221,7 +221,7 @@ namespace Image2Ascii.Test
             // arrange
             var source = new char[] { 'a', 'A', 'b', 'B', 'W', '!' };
             var tileHeight = 50;
-            var tileWidth = 50;
+            var tileWidth = _tileService.CalculateTileWidth(tileHeight);
             var background = Color.Black;
             var foreground = Color.White;
 
@@ -239,7 +239,7 @@ namespace Image2Ascii.Test
             // arrange
             var source = _characterService.GetCharacters();
             var tileHeight = 20;
-            var tileWidth = (int)(tileHeight * 0.8);
+            var tileWidth = _tileService.CalculateTileWidth(tileHeight);
             var background = Color.Black;
             var foreground = Color.White;
 

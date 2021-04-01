@@ -5,6 +5,7 @@ namespace Image2Ascii.Services
 {
     public interface ITileService
     {
+        int CalculateTileWidth(int tileHeight);
         int CalculateWidthInTiles(int tileWidth, int imageWidth);
         int CalculateHeightInTiles(int tileHeight, int imageHeight);
         Tile[,] GetTiles(Bitmap source, int tileWidth, int tileHeight, Color defaultBackgroundColour);

@@ -13,6 +13,9 @@ namespace Image2Ascii.Services
             _colorConvertor = colorConvertor;
         }
 
+        public int CalculateTileWidth(int tileHeight) =>
+            (int)(tileHeight * 0.8);
+
         public int CalculateHeightInTiles(int tileHeight, int imageHeight) =>
             (int)Math.Ceiling((decimal)imageHeight / tileHeight);
 
@@ -49,10 +52,12 @@ namespace Image2Ascii.Services
             var tiles = new Tile[source.Length];
             var backgroundBrush = new SolidBrush(backgroundColour);
 
-            var fontAdjustment = 0.4;
-            var fontOffset = -0.2;
+            var fontAdjustment = 0;
+            var fontOffsetX = -0.1;
+            var fontOffsetY = -0.1;
             var fontSize = (float)(tileHeight + tileHeight * fontAdjustment);
-            var fontPaintOffset = (float)(tileHeight * fontOffset);
+            var fontPaintOffsetX = (float)(tileHeight * fontOffsetX);
+            var fontPaintOffsetY = (float)(tileHeight * fontOffsetY);
 
             var foregroundBrush = new SolidBrush(foregroundColour);
             var tileFont = new Font(FontFamily.GenericMonospace, fontSize, FontStyle.Regular, GraphicsUnit.Pixel);
@@ -69,8 +74,8 @@ namespace Image2Ascii.Services
                             character.ToString(),
                             tileFont,
                             foregroundBrush,
-                            fontPaintOffset,
-                            fontPaintOffset,
+                            fontPaintOffsetX,
+                            fontPaintOffsetY,
                             StringFormat.GenericDefault);
                         graph.Save();
                     }
