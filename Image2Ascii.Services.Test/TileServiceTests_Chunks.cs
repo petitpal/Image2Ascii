@@ -10,12 +10,14 @@ namespace Image2Ascii.Test
     {
         private IGreyscaleConvertor _greyScaleConvertor;
         private ITileService _tileService;
+        private ICharacterService _characterService;
 
         [SetUp]
         public void Setup()
         {
             _greyScaleConvertor = new GreyscaleConvertor();
             _tileService = new TileService(_greyScaleConvertor);
+            _characterService = new CharacterService();
         }
 
         private static IEnumerable<TestCaseData> GetTile_Counts_TestDate()
@@ -214,12 +216,30 @@ namespace Image2Ascii.Test
 
 
         [Test]
-        public void GetTiles_Characters()
+        public void GetTiles_CharactersFixed()
         {
             // arrange
             var source = new char[] { 'a', 'A', 'b', 'B', 'W', '!' };
             var tileHeight = 50;
             var tileWidth = 50;
+            var background = Color.Black;
+            var foreground = Color.White;
+
+            // act
+            var tiles = _tileService.GetTiles(source, tileWidth, tileHeight, foreground, background);
+
+            // assert
+            Assert.IsNotNull(tiles);
+        }
+
+
+        [Test]
+        public void GetTiles_CharactersFromService()
+        {
+            // arrange
+            var source = _characterService.GetCharacters();
+            var tileHeight = 20;
+            var tileWidth = (int)(tileHeight * 0.8);
             var background = Color.Black;
             var foreground = Color.White;
 
