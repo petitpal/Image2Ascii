@@ -79,7 +79,7 @@ namespace Image2Ascii.Services
                             StringFormat.GenericDefault);
                         graph.Save();
                     }
-                    tileBitmap.Save($"c:\\temp\\tile{tileIndex}.bmp");
+                    //tileBitmap.Save($"c:\\temp\\tile{tileIndex}.bmp");
 
                     tiles[tileIndex] = GetTile(tileBitmap, 0, 0, tileWidth, tileHeight, backgroundColour);
                 }
