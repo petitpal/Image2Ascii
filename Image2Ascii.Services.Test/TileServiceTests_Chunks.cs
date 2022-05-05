@@ -240,7 +240,7 @@ namespace Image2Ascii.Test
             var source = _characterService.GetCharacters();
             var tileHeight = 20;
             var tileWidth = _tileService.CalculateTileWidth(tileHeight);
-            var background = Color.Black;
+            var background = Color.Transparent;
             var foreground = Color.White;
 
             // act
